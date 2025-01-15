@@ -1,2 +1,4 @@
-# homelab
-Homelab
+# Homelab
+
+* [Ansible](./ansible/docs.md)
+
