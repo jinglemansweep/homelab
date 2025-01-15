@@ -1,11 +1,9 @@
 ---
-- name: Install and configure NGINX web server
+- name: Ansible Pull Test
   hosts: all
   become: true
 
   tasks:
-    - name: Ensure NGINX is installed
-      apt:
-        name: nginx
-        state: present
-      when: ansible_os_family == "Debian"
+    - name: Role Test
+      include_role:
+        name: test
