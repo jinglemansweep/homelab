@@ -1,6 +1,6 @@
 ---
 - name: Install and configure NGINX web server
-  hosts: localhost
+  hosts: all
   become: true
 
   tasks:
