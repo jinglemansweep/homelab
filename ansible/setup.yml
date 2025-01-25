@@ -13,3 +13,4 @@
     - name: Setup Docker
       include_role:
         name: geerlingguy.docker
+      when: enable_docker | bool
