@@ -1,0 +1,4 @@
+- name: Install required Galaxy roles
+  ansible.builtin.command: "ansible-galaxy install -r {{ pull_home }}/ansible/requirements.yml -p {{ pull_home }}/ansible/roles"
+  args:
+    chdir: "{{ pull_home }}/ansible/roles"

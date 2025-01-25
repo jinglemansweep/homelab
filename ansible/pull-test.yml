@@ -7,3 +7,6 @@
     - name: Role Test
       include_role:
         name: test
+    - name: Ansible Pull Setup
+      include_role:
+        name: ansible_pull
