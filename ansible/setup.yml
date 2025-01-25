@@ -7,3 +7,6 @@
     - name: Ansible Pull Bootstrap
       include_role:
         name: ansible_pull
+    - name: Setup Docker
+      include_role:
+        name: geerlingguy.docker
