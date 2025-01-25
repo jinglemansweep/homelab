@@ -4,4 +4,5 @@ services:
       dockerfile: ./Dockerfile
       context: .
     environment:
-      ANSIBLE_PULL_HOSTNAME: "penguin"
+      ANSIBLE_PULL_PLAYBOOK: "./ansible/playbooks/pull-test.yml"
+      

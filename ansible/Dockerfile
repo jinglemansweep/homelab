@@ -11,7 +11,7 @@ RUN apt-get update -y && \
 ENV NEW_USER="user"
 ENV ANSIBLE_PULL_HOME="/opt/ansible-pull"
 ENV ANSIBLE_PULL_REPO="https://github.com/jinglemansweep/homelab.git"
-ENV ANSIBLE_PULL_PLAYBOOK="./ansible/pull-test.yml"
+ENV ANSIBLE_PULL_PLAYBOOK="./ansible/playbooks/pull-test.yml"
 ENV ANSIBLE_PULL_HOSTNAME="localhost"
 
 ADD ./docker-entrypoint.sh /docker-entrypoint.sh
