@@ -1,4 +1,5 @@
 # Homelab
 
-* [Ansible](./ansible/docs.md)
+* [Quick Start](./docs/quickstart.md)
+* [Ansible](./ansible/readme.md)
 
