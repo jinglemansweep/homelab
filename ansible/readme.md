@@ -10,7 +10,8 @@ Provision new devices quickly by pulling and running playbooks directly from sou
 
 #### Usage
 
-    ansible-pull -K -v -c local -U https://github.com/jinglemansweep/homelab.git ./ansible/pull-test.yml -i localhost, --extra-vars pull_home=/opt/ansible-pull
+    export PULL_HOME="/opt/ansible-pull"
+    sudo ansible-pull -c local -d ${PULL_HOME} -U https://github.com/jinglemansweep/homelab.git ./ansible/setup.yml -i localhost, --extra-vars pull_home=${PULL_HOME}
 
 #### Testing
 
