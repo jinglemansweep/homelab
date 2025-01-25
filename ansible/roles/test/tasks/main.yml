@@ -1,3 +1,0 @@
-- name: Debug Messages
-  debug:
-    msg: "pull_home={{ pull_home }}"

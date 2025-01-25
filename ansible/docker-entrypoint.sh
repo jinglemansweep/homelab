@@ -25,3 +25,6 @@ echo
 echo "/opt/ansible-pull/ansible:"
 ls -l /opt/ansible-pull/ansible
 echo
+echo "/opt/ansible-pull/ansible/roles:"
+ls -l /opt/ansible-pull/ansible/roles
+echo

@@ -4,5 +4,5 @@ services:
       dockerfile: ./Dockerfile
       context: .
     environment:
-      ANSIBLE_PULL_PLAYBOOK: "./ansible/pull-test.yml"
+      ANSIBLE_PULL_PLAYBOOK: "./ansible/setup.yml"
       

@@ -1,0 +1,9 @@
+---
+- name: Setup Playbook
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Ansible Pull Bootstrap
+      include_role:
+        name: ansible_pull
