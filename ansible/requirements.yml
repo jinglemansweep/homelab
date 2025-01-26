@@ -4,3 +4,6 @@
   version: 1.0.1
 - name: geerlingguy.kubernetes
   version: 8.1.0
+- name: buluma.hashicorp
+  version: 24.3.31
+

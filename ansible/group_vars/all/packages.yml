@@ -19,3 +19,6 @@ kubernetes_packages:
     state: absent
   - name: kubernetes-cni
     state: absent
+
+hashicorp_products:
+  - name: terraform
