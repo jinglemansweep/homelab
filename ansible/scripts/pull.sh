@@ -19,4 +19,5 @@ sudo ansible-pull -c local \
 -U ${ANSIBLE_PULL_REPO} \
 ./ansible/${ANSIBLE_PULL_PLAYBOOK} \
 -i localhost, \
--e pull_home=${ANSIBLE_PULL_HOME}
+-e ansible_pull_repo=${ANSIBLE_PULL_REPO} \
+-e ansible_pull_home=${ANSIBLE_PULL_HOME}
