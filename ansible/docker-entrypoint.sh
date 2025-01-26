@@ -12,7 +12,7 @@ ansible-pull -v \
   -U ${ANSIBLE_PULL_REPO} \
   ${ANSIBLE_PULL_PLAYBOOK} \
   -i "localhost," \
-  --extra-vars pull_home=${ANSIBLE_PULL_HOME}
+  -e pull_home=${ANSIBLE_PULL_HOME}
 
 # exit 0
 
