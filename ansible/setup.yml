@@ -21,15 +21,6 @@
       include_role:
         name: geerlingguy.docker
       when: enable_docker | bool
-    # Install Kubernetes Tools
-    - name: Setup Kubernetes Tools
-      include_role:
-        name: geerlingguy.kubernetes
-      vars:
-        kubernetes_packages:
-          - name: kubectl
-            state: present
-      when: enable_kubernetes | bool
     # Install Helm
     - name: Setup Helm
       include_role:
