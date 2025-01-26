@@ -1,1 +1,2 @@
 enable_docker: true
+enable_helm: true

@@ -4,13 +4,21 @@
   become: true
 
   tasks:
+    # Setup Ansible Pull (install roles etc.)
     - name: Ansible Pull Bootstrap
       include_role:
         name: ansible_pull
+    # Update, Upgrade & Install OS Packages
     - name: Package Maintenance
       include_role:
         name: packages
+    # Install Docker
     - name: Setup Docker
       include_role:
         name: geerlingguy.docker
       when: enable_docker | bool
+    # Install Helm
+    - name: Setup Helm
+      include_role:
+        name: geerlingguy.helm
+      when: enable_helm | bool
