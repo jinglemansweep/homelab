@@ -18,11 +18,12 @@
     src: templates/ansible-pull.timer.j2
     dest: /etc/systemd/system/ansible-pull.timer
 
-- name: Enable timer
-  ansible.builtin.systemd:
-    name: ansible-pull.timer
-    state: started
-    enabled: true
-
 - name: Reload systemd daemon configuration
   command: systemctl daemon-reload
+
+- name: Enable and start timer
+  ansible.builtin.systemd:
+    name: ansible-pull.timer
+    state: restarted
+    enabled: true
+
