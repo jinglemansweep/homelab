@@ -2,3 +2,5 @@
   version: 7.4.4
 - name: geerlingguy.helm
   version: 1.0.1
+- name: geerlingguy.kubernetes
+  version: 8.1.0

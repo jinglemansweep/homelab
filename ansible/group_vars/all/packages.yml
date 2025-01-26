@@ -9,3 +9,13 @@ packages_base:
   - screen
   - tmux
   - vim
+
+kubernetes_packages:
+  - name: kubelet
+    state: absent
+  - name: kubectl
+    state: absent
+  - name: kubeadm
+    state: absent
+  - name: kubernetes-cni
+    state: absent
