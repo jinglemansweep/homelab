@@ -8,12 +8,14 @@
     - name: Ansible Pull Bootstrap
       include_role:
         name: ansible_pull
-    # Setup Ansible
+    # Install Pip
+    - name: Install Pip
+      include_role:
+        name: geerlingguy.pip
+    # Install Ansible
     - name: Setup Ansible
       include_role:
         name: geerlingguy.ansible
-      vars:
-        ansible_install_method: package
     # Update, Upgrade & Install OS Packages
     - name: Package Maintenance
       include_role:
