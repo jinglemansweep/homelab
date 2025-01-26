@@ -16,5 +16,5 @@ Install Ansible using [official instructions](https://docs.ansible.com/ansible/l
     
     sudo apt update && sudo apt install ansible
 
-To continue installing and configuring required packages, see [Ansible Pull](../ansible/readme.md) documentation.
+To continue installing and configuring required packages, see [Ansible Pull](./ansible/readme.md) documentation.
 
