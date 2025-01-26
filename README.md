@@ -20,6 +20,10 @@ Install Ansible using [official instructions](https://docs.ansible.com/ansible/l
 
 Ansible Pull is used to provision devices in a stateless manner. This means that the device will be provisioned from source control and will automatically update itself when changes are made to the source control repository.
 
-    sudo ansible-pull -c local -d /opt/ansible-pull -U https://github.com/jinglemansweep/homelab.git ./ansible/setup.yml -i localhost, -e pull_home=/opt/ansible-pull
+Run the following as `root`:
 
-Once provisioned, a helper script is installed in [`/opt/ansible-pull/scripts/pull.sh`](./ansible/scripts/pull.sh) which can be invoked to update the device. By default, a systemd service (`ansible-pull.service`) and timer (`ansible-pull.timer`) are installed to automatically update the device daily.
+    ANSIBLE_PULL_REPO="https://github.com/jinglemansweep/homelab.git"
+    ANSIBLE_PULL_HOME="/opt/ansible-pull"
+    ansible-pull -c local -d ${ANSIBLE_PULL_HOME} -U ${ANSIBLE_PULL_REPO} ./ansible/setup.yml -i localhost, -e ansible_pull_repo=${ANSIBLE_PULL_REPO} -e ansible_pull_home=${ANSIBLE_PULL_HOME}
+
+Once provisioned, a [helper script](./ansible/scripts/pull.sh) is installed in `/opt/ansible-pull/scripts/pull.sh` which can be invoked to update the device. By default, a systemd service (`ansible-pull.service`) and timer (`ansible-pull.timer`) are installed to automatically update the device daily.

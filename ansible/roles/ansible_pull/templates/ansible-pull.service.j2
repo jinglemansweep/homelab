@@ -3,4 +3,4 @@ Description=Ansible Pull
 
 [Service]
 Type=oneshot
-ExecStart=/bin/bash {{ pull_home }}/ansible/scripts/pull.sh update.yml
+ExecStart=/bin/bash {{ ansible_pull_home }}/ansible/scripts/pull.sh update.yml
