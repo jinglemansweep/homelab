@@ -1,3 +1,4 @@
 enable_docker: true
 enable_helm: true
 enable_kubernetes: false
+enable_hashicorp: true
