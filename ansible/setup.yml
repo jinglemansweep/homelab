@@ -8,27 +8,24 @@
     - name: Ansible Pull Bootstrap
       include_role:
         name: ansible_pull
-    # Install Pip
-    - name: Install Pip
-      include_role:
-        name: geerlingguy.pip
-    # Install Ansible
-    - name: Setup Ansible
-      include_role:
-        name: geerlingguy.ansible
     # Update, Upgrade & Install OS Packages
     - name: Package Maintenance
       include_role:
         name: packages
-    # Install Docker
+    # Setup Docker
     - name: Setup Docker
       include_role:
         name: geerlingguy.docker
       when: enable_docker | bool
-    # Install Helm
+    # Setup Helm
     - name: Setup Helm
       include_role:
         name: geerlingguy.helm
       vars:
         helm_version: "v3.16.3"
       when: enable_helm | bool
+    # Setup Kubernetes
+    - name: Setup Kubernetes
+      include_role:
+        name: geerlingguy.kubernetes
+      when: enable_kubernetes | bool

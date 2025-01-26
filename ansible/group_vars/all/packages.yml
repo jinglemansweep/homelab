@@ -14,7 +14,7 @@ kubernetes_packages:
   - name: kubelet
     state: absent
   - name: kubectl
-    state: absent
+    state: present
   - name: kubeadm
     state: absent
   - name: kubernetes-cni
