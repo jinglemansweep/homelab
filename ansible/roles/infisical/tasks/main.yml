@@ -11,3 +11,8 @@
     name: infisical
     state: present
     update_cache: true
+
+- name: Remove setup script
+  ansible.builtin.file:
+    path: /tmp/infisical-setup.sh
+    state: absent
