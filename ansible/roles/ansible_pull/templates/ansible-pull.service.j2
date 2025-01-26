@@ -1,0 +1,6 @@
+[Unit]
+Description=Ansible Pull
+
+[Service]
+Type=oneshot
+ExecStart={{ pull_home }}/scripts/pull.sh update.yml
