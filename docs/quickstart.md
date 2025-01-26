@@ -3,7 +3,7 @@
 From a fresh Debian device, install core dependencies and setup user permissions:
 
     export default_user="user"
-    apt update && apt install git sudo
+    apt update && apt install git gnupg sudo
     usermod -aG sudo ${default_user}
 
 Install Ansible using [official instructions](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-debian):
