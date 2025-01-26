@@ -4,15 +4,11 @@
 
 Provision new devices quickly by pulling and running playbooks directly from source control.
 
-#### Install
-
-    apt install ansible git
-
-#### Usage
+### Usage
 
     sudo ansible-pull -c local -d /opt/ansible-pull -U https://github.com/jinglemansweep/homelab.git ./ansible/setup.yml -i localhost, -e pull_home=/opt/ansible-pull
 
-#### Testing
+### Testing
 
 Build test Docker container:
 
