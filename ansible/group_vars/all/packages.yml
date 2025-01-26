@@ -3,6 +3,7 @@ packages_base:
   - cifs-utils
   - curl
   - git
+  - gnupg
   - htop
   - jq
   - mosquitto-clients
