@@ -23,3 +23,6 @@
     name: ansible-pull.timer
     state: started
     enabled: true
+
+- name: Reload systemd daemon configuration
+  command: systemctl daemon-reload
