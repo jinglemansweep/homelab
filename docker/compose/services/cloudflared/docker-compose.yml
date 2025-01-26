@@ -1,0 +1,9 @@
+services:
+  cloudflared:
+    container_name: cloudflared
+    image: cloudflare/cloudflared:latest
+    restart: always
+    command: tunnel --no-autoupdate run --protocol quic --token ${CLOUDFLARED_TOKEN}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    
