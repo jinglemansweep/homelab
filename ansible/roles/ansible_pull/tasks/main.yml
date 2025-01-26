@@ -8,3 +8,13 @@
     src: templates/ansible-pull.env.j2
     dest: /etc/default/ansible-pull
 
+- name: Install service
+  ansible.builtin.template:
+    src: templates/ansible-pull.service.j2
+    dest: /etc/systemd/system/ansible-pull.service
+
+- name: Start service
+  ansible.builtin.systemd:
+    name: ansible-pull
+    state: started
+    enabled: true
