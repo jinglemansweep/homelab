@@ -22,5 +22,5 @@
       include_role:
         name: geerlingguy.helm
       vars:
-        helm_version: 'v3.17.0'
+        helm_version: "v3.17.0"
       when: enable_helm | bool
