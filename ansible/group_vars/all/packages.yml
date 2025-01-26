@@ -1,2 +1,11 @@
-packages:
-  base: wget
+packages_base:
+  - build-essential
+  - curl
+  - git
+  - htop
+  - jq
+  - mosquitto-clients
+  - wget
+  - screen
+  - tmux
+  - vim
