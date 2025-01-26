@@ -8,6 +8,10 @@
     - name: Ansible Pull Bootstrap
       include_role:
         name: ansible_pull
+    # Setup Ansible
+    - name: Setup Ansible
+      include_role:
+        name: geerlingguy.ansible
     # Update, Upgrade & Install OS Packages
     - name: Package Maintenance
       include_role:
