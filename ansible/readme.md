@@ -1,8 +1,6 @@
-# Ansible
+# Ansible Pull
 
-## Ansible Pull
-
-Provision new devices quickly by pulling and running playbooks directly from source control.
+Provision new devices quickly by pulling and running playbooks directly from source control. Once provisioned, devices will check for updates and apply them automatically.
 
 ### Usage
 
@@ -14,9 +12,3 @@ Build test Docker container:
 
     cd ansible
     docker compose up
-
-Test playbooks locally:
-
-    ansible-playbook -c local -i localhost, <playbook>.yml -e pull_home=/opt/ansible-pull
-
-
