@@ -9,21 +9,18 @@
     - name: Ansible Pull Bootstrap
       include_role:
         name: ansible_pull
-      tags: [install, maintenance]
-  
+
     # Update, Upgrade & Install OS Packages
     - name: Package Maintenance
       include_role:
         name: packages
-      tags: [install, maintenance]
   
     # Setup Docker
     - name: Setup Docker
       include_role:
         name: geerlingguy.docker
       when: enable_docker | bool
-      tags: [install]
-  
+      
     # Setup Helm
     - name: Setup Helm
       include_role:
@@ -31,15 +28,13 @@
       vars:
         helm_version: "v3.16.3"
       when: enable_helm | bool
-      tags: [install]
-
+      
     # Setup Hashicorp Tools
     - name: Setup Hashicorp Tools
       include_role:
         name: buluma.hashicorp
       when: enable_hashicorp | bool
-      tags: [install]
-
+      
     # Setup Kubernetes
     # - name: Setup Kubernetes
     #   include_role:
