@@ -6,6 +6,7 @@ packages_base:
   - gnupg
   - htop
   - jq
+  - keychain
   - mosquitto-clients
   - nfs-common
   - python-is-python3
