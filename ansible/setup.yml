@@ -25,7 +25,7 @@
         helm_version: "v3.16.3"
       when: enable_helm | bool
     # Setup Kubernetes
-    - name: Setup Kubernetes
-      include_role:
-        name: geerlingguy.kubernetes
-      when: enable_kubernetes | bool
+    # - name: Setup Kubernetes
+    #   include_role:
+    #     name: geerlingguy.kubernetes
+    #   when: enable_kubernetes | bool
