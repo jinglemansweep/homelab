@@ -5,6 +5,6 @@
 
 - name: Install environment files
   ansible.builtin.template:
-    src: ./templates/ansible-pull.env.j2
+    src: templates/ansible-pull.env.j2
     dest: /etc/default/ansible-pull
 
