@@ -27,3 +27,4 @@ Run the following as `root`:
     ansible-pull -c local -d ${ANSIBLE_PULL_HOME} -U ${ANSIBLE_PULL_REPO} ./ansible/setup.yml -i localhost, -e ansible_pull_repo=${ANSIBLE_PULL_REPO} -e ansible_pull_home=${ANSIBLE_PULL_HOME}
 
 Once provisioned, a [helper script](./ansible/scripts/pull.sh) is installed in `/opt/ansible-pull/scripts/pull.sh` which can be invoked to update the device. By default, a systemd service (`ansible-pull.service`) and timer (`ansible-pull.timer`) are installed to automatically update the device daily.
+
