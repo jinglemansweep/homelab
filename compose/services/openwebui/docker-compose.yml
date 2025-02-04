@@ -6,7 +6,7 @@ services:
     volumes:
       - openwebui-data:/app/backend/data
     ports:
-      - 3000:3000
+      - 8080:8080
     
 volumes:
   openwebui-data:
