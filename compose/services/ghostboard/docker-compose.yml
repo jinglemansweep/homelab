@@ -1,0 +1,7 @@
+services:
+  ghostboard:
+    container_name: ghostboard
+    image: thehelpfulidiot/ghostboard-server:latest
+    restart: always
+    ports:
+      - 8081:80
