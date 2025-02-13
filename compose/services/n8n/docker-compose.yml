@@ -3,7 +3,7 @@ services:
     container_name: n8n
     image: louislam/uptime-kuma:1
     restart: always
-    env:
+    environment:
       - TZ="Europe/London"
       - GENERIC_TIMEZONE="Europe/London"
     volumes:
