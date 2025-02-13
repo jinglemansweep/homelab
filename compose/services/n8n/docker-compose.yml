@@ -6,6 +6,7 @@ services:
     environment:
       - TZ="Europe/London"
       - GENERIC_TIMEZONE="Europe/London"
+      - WEBHOOK_URL="https://n8n.ptre.net"
     volumes:
       - n8n-data:/home/node/.n8n
     ports:
