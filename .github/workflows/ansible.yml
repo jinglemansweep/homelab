@@ -29,6 +29,9 @@ jobs:
         oauth-client-id: "${TAILSCALE_OAUTH_CLIENT_ID}"
         oauth-secret: "${TAILSCALE_OAUTH_CLIENT_SECRET}"
         tags: tag:ci
+    - name: Ping
+      run: |
+        ping -c 10 10.1.1.116
     - name: Run Playbook
       uses: dawidd6/action-ansible-playbook@v3
       with:
