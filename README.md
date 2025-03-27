@@ -1,6 +1,6 @@
 # Homelab
 
-[![Infisical Secrets](https://github.com/jinglemansweep/homelab/actions/workflows/infisical.yml/badge.svg)](https://github.com/jinglemansweep/homelab/actions/workflows/infisical.yml) [![Tailscale](https://github.com/jinglemansweep/homelab/actions/workflows/tailscale.yml/badge.svg)](https://github.com/jinglemansweep/homelab/actions/workflows/tailscale.yml) [![Ansible](https://github.com/jinglemansweep/homelab/actions/workflows/ansible.yml/badge.svg)](https://github.com/jinglemansweep/homelab/actions/workflows/ansible.yml)
+[![Ansible](https://github.com/jinglemansweep/homelab/actions/workflows/ansible.yml/badge.svg)](https://github.com/jinglemansweep/homelab/actions/workflows/ansible.yml)
 
 ## Quick Start
 
