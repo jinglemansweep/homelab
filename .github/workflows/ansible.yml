@@ -25,3 +25,29 @@ jobs:
         version: "${{ vars.ANSIBLE_VERSION }}"
     - name: "Ansible Version"
       run: ansible-playbook --version
+    - name: Run Playbook
+      uses: dawidd6/action-ansible-playbook@v3
+      with:
+        playbook: update.yml
+        directory: ./ansible
+        configuration: |
+          [defaults]
+          callbacks_enabled = ansible.posix.profile_tasks, ansible.posix.timer
+          stdout_callback = yaml
+          nocows = false
+        key: {ANSIBLE_SSH_PRIVATE_KEY}
+        inventory: |
+          [all]
+          example.com
+          [group1]
+          example.com
+        known_hosts: |
+          example.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
+        vault_password: ${ANSIBLE_VAULT_PASSWORD}
+        requirements: requirements.yml
+        options: |
+          --inventory .hosts
+          --limit group1
+          --extra-vars hello=there
+          --verbose
+        
