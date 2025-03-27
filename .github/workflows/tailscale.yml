@@ -1,0 +1,27 @@
+name: Tailscale
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  Tailscale:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Infisical Login
+      uses: Infisical/secrets-action@v1.0.9
+      with:
+        project-slug: "${{ secrets.INFISICAL_PROJECT_SLUG }}"
+        env-slug: "${{ vars.INFISICAL_ENV_SLUG }}"
+        method: "universal"
+        client-id: "${{ secrets.INFISICAL_CLIENT_ID }}"
+        client-secret: "${{ secrets.INFISICAL_CLIENT_SECRET }}"
+    - name: Tailscale
+      uses: tailscale/github-action@v3
+      with:
+        oauth-client-id: "${TAILSCALE_OAUTH_CLIENT_ID}"
+        oauth-secret: "${TAILSCALE_OAUTH_CLIENT_SECRET}"
+        tags: tag:ci
