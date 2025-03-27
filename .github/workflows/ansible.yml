@@ -20,7 +20,7 @@ jobs:
         client-id: "${{ secrets.INFISICAL_CLIENT_ID }}"
         client-secret: "${{ secrets.INFISICAL_CLIENT_SECRET }}"
     - name: "Install Ansible"
-      uses: alex-oleshkevich/setup-ansible@VERSION 
+      uses: alex-oleshkevich/setup-ansible@v1.0.1
       with:
         version: "${{ vars.ANSIBLE_VERSION }}"
     - name: "Ansible Version"
