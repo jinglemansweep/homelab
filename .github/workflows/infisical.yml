@@ -16,11 +16,9 @@ jobs:
     - name: Infisical Login
       uses: Infisical/secrets-action@v1.0.9
       with:
-        project-slug: "{{ secrets.INFISICAL_PROJECT_SLUG }}"
-        env-slug: "{{ vars.INFISICAL_ENV_SLUG }}"
+        project-slug: "${{ secrets.INFISICAL_PROJECT_SLUG }}"
+        env-slug: "${{ vars.INFISICAL_ENV_SLUG }}"
         method: "universal"
-        client-id: "{{ secrets.INFISICAL_CLIENT_ID }}"
-        client-secret: "{{ secrets.INFISICAL_CLIENT_SECRET }}"
-        identity-id: "24be0d94-b43a-41c4-812c-1e8654d9ce1e"
-        
-        
+        client-id: "${{ secrets.INFISICAL_CLIENT_ID }}"
+        client-secret: "${{ secrets.INFISICAL_CLIENT_SECRET }}"
+  
