@@ -50,5 +50,6 @@ jobs:
         vault_password: ${ANSIBLE_VAULT_PASSWORD}
         requirements: requirements.yml
         options: |
+          --ssh-extra-args "-o StrictHostKeyChecking=no"
           -vvvvvvv
         
