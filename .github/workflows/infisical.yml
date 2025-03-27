@@ -23,5 +23,5 @@ jobs:
         client-secret: "${{ secrets.INFISICAL_CLIENT_SECRET }}"
     - name: Debug Output
       run: |
-        echo "Fastmail SMTP Host: $SMTP_FASTMAIL_HOST"
+        echo "Fastmail SMTP Host: $FASTMAIL_SMTP_HOST"
       
