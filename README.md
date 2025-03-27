@@ -1,5 +1,7 @@
 # Homelab
 
+[![Infisical Secrets](https://github.com/jinglemansweep/homelab/actions/workflows/infisical.yml/badge.svg)](https://github.com/jinglemansweep/homelab/actions/workflows/infisical.yml)
+
 ## Quick Start
 
 ### Install Dependencies
