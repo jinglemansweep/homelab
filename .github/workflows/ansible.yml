@@ -38,11 +38,9 @@ jobs:
         key: ${ANSIBLE_SSH_PRIVATE_KEY}
         inventory: |
           [all]
-          example.com
-          [group1]
-          example.com
+          services.adm.ptre.es  ansible_host=10.1.1.116
         known_hosts: |
-          example.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
+          services.adm.ptre.es ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBioAMqS7vilgfKUwa2NYwUWmHnEkgJQFQMbv4VhKkc1
         vault_password: ${ANSIBLE_VAULT_PASSWORD}
         requirements: requirements.yml
         options: |
