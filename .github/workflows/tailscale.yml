@@ -27,5 +27,5 @@ jobs:
         tags: tag:ci
     - name: Ping
       run: |
-        ping -c 10 services.adm.ptre.es
+        ping -c 10 10.1.1.116
         
