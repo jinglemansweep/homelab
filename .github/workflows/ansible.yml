@@ -36,13 +36,14 @@ jobs:
         directory: ./ansible
         configuration: |
           [defaults]
+          remote_user = ansible
           host_key_checking = false
           result_format = yaml
           nocows = false
         key: ${ANSIBLE_SSH_PRIVATE_KEY}
         inventory: |
           [all]
-          services.adm.ptre.es  ansible_host=10.1.1.116   ansible_user=ansible
+          services.adm.ptre.es  ansible_host=10.1.1.116
         vault_password: ${ANSIBLE_VAULT_PASSWORD}
         requirements: requirements.yml
         options: |
