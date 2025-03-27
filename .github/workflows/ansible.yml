@@ -1,0 +1,27 @@
+name: Ansible
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  Ansible:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Infisical Login
+      uses: Infisical/secrets-action@v1.0.9
+      with:
+        project-slug: "${{ secrets.INFISICAL_PROJECT_SLUG }}"
+        env-slug: "${{ vars.INFISICAL_ENV_SLUG }}"
+        method: "universal"
+        client-id: "${{ secrets.INFISICAL_CLIENT_ID }}"
+        client-secret: "${{ secrets.INFISICAL_CLIENT_SECRET }}"
+    - name: "Install Ansible"
+      uses: alex-oleshkevich/setup-ansible@VERSION 
+      with:
+        version: "${{ vars.ANSIBLE_VERSION }}"
+    - name: "Ansible Version"
+      run: ansible-playbook --version
