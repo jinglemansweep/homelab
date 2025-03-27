@@ -46,8 +46,5 @@ jobs:
         vault_password: ${ANSIBLE_VAULT_PASSWORD}
         requirements: requirements.yml
         options: |
-          --inventory .hosts
-          --limit group1
-          --extra-vars hello=there
           --verbose
         
