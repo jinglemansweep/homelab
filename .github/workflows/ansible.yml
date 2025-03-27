@@ -50,5 +50,5 @@ jobs:
         vault_password: ${ANSIBLE_VAULT_PASSWORD}
         requirements: requirements.yml
         options: |
-          -vvvvv
+          -vvvvvvv
         
