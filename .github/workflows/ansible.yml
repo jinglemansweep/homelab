@@ -23,8 +23,12 @@ jobs:
       uses: alex-oleshkevich/setup-ansible@v1.0.1
       with:
         version: "${{ vars.ANSIBLE_VERSION }}"
-    - name: "Ansible Version"
-      run: ansible-playbook --version
+    - name: Tailscale
+      uses: tailscale/github-action@v3
+      with:
+        oauth-client-id: "${TAILSCALE_OAUTH_CLIENT_ID}"
+        oauth-secret: "${TAILSCALE_OAUTH_CLIENT_SECRET}"
+        tags: tag:ci
     - name: Run Playbook
       uses: dawidd6/action-ansible-playbook@v3
       with:
