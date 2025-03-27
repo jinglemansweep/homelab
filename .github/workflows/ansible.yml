@@ -36,15 +36,13 @@ jobs:
         directory: ./ansible
         configuration: |
           [defaults]
-          callbacks_enabled = ansible.posix.profile_tasks, ansible.posix.timer
-          stdout_callback = yaml
+          host_key_checking = false
+          result_format = yaml
           nocows = false
         key: ${ANSIBLE_SSH_PRIVATE_KEY}
         inventory: |
           [all]
           services.adm.ptre.es  ansible_host=10.1.1.116
-        known_hosts: |
-          services.adm.ptre.es ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBioAMqS7vilgfKUwa2NYwUWmHnEkgJQFQMbv4VhKkc1
         vault_password: ${ANSIBLE_VAULT_PASSWORD}
         requirements: requirements.yml
         options: |
