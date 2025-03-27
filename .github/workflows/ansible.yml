@@ -42,7 +42,7 @@ jobs:
         key: ${ANSIBLE_SSH_PRIVATE_KEY}
         inventory: |
           [all]
-          services.adm.ptre.es  ansible_host=10.1.1.116
+          services.adm.ptre.es  ansible_host=10.1.1.116   ansible_user=ansible
         vault_password: ${ANSIBLE_VAULT_PASSWORD}
         requirements: requirements.yml
         options: |
