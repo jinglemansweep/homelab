@@ -31,7 +31,7 @@ jobs:
         tags: tag:ci
     - name: Ping
       run: |
-        ping -c 10 10.1.1.116
+        ping -c 3 10.1.1.116
     - name: Run Playbook
       uses: dawidd6/action-ansible-playbook@v3
       with:
