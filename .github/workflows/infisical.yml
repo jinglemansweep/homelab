@@ -22,5 +22,5 @@ jobs:
         client-id: "${{ secrets.INFISICAL_CLIENT_ID }}"
         client-secret: "${{ secrets.INFISICAL_CLIENT_SECRET }}"
     - name: Debug Output
-      run: env | grep FASTMAIL_SMTP_HOST
+      run: echo "Fastmail SMTP Host: $SMTP_FASTMAIL_HOST"
       
