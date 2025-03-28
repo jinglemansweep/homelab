@@ -55,7 +55,7 @@ jobs:
         chmod 600 ansible.key
     - name: Run Playbook
       run: |
-        ansible-playbook -i inventory -c ssh --private-key ansible.key ansible/${{ github.event.inputs.playbook }}.yml
+        ansible-playbook -i inventory -c ssh --private-key ansible.key ansible/${{ inputs.playbook }}.yml
     - name: Cleanup
       run: |
         rm -f inventory ansible.cfg ansible.key
