@@ -4,7 +4,13 @@ on:
   push:
     branches: [ "main" ]
   workflow_dispatch:
-
+    inputs: 
+      playbook:
+        required: true
+        type: choice
+        options:
+          - update
+        
 jobs:
   Ansible:
     runs-on: ubuntu-latest
@@ -49,7 +55,7 @@ jobs:
         chmod 600 ansible.key
     - name: Run Playbook
       run: |
-        ansible-playbook -i inventory -c ssh --private-key ansible.key ansible/update.yml
+        ansible-playbook -i inventory -c ssh --private-key ansible.key ansible/${{ github.event.inputs.playbook }}.yml
     - name: Cleanup
       run: |
         rm -f inventory ansible.cfg ansible.key
