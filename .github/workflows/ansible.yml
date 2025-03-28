@@ -32,24 +32,41 @@ jobs:
     - name: Ping
       run: |
         ping -c 3 10.1.1.116
-    - name: Run Playbook
-      uses: dawidd6/action-ansible-playbook@v3
-      with:
-        playbook: update.yml
-        directory: ./ansible
-        configuration: |
-          [defaults]
-          remote_user = ansible
-          host_key_checking = false
-          result_format = yaml
-          nocows = false
-        key: ${ANSIBLE_SSH_PRIVATE_KEY}
-        inventory: |
-          [all]
-          services.adm.ptre.es  ansible_host=10.1.1.116
-        vault_password: ${ANSIBLE_VAULT_PASSWORD}
-        requirements: requirements.yml
-        options: |
-          --user ansible
-          -vvvvvvv
+    - name: Setup
+      run: |
+        cat <<EOF > inventory
+        [all]
+        services.adm.ptre.es  ansible_host=10.1.1.116
+        EOF
+        cat <<EOF > ansible.cfg
+        [defaults]
+        remote_user = ansible
+        host_key_checking = false
+        result_format = yaml
+        nocows = false
+        EOF
+        cat ${ANSIBLE_SSH_PRIVATE_KEY} > ansible.key
+        chmod 600 ansible.key
+
+
+    # - name: Run Playbook
+    #   uses: dawidd6/action-ansible-playbook@v3
+    #   with:
+    #     playbook: update.yml
+    #     directory: ./ansible
+    #     configuration: |
+    #       [defaults]
+    #       remote_user = ansible
+    #       host_key_checking = false
+    #       result_format = yaml
+    #       nocows = false
+    #     key: ${ANSIBLE_SSH_PRIVATE_KEY}
+    #     inventory: |
+    #       [all]
+    #       services.adm.ptre.es  ansible_host=10.1.1.116
+    #     vault_password: ${ANSIBLE_VAULT_PASSWORD}
+    #     requirements: requirements.yml
+    #     options: |
+    #       --user ansible
+    #       -vvvvvvv
         
