@@ -4,11 +4,6 @@
   become: true
 
   tasks:
-
-    # Setup Ansible Pull (install roles etc.)
-    - name: Ansible Pull Bootstrap
-      include_role:
-        name: ansible_pull
   
     # Update, Upgrade & Install OS Packages
     - name: Package Maintenance
