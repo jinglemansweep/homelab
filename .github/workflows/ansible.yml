@@ -47,8 +47,12 @@ jobs:
         EOF
         cat ${ANSIBLE_SSH_PRIVATE_KEY} > ansible.key
         chmod 600 ansible.key
-
-
+    - name: Run Playbook
+      run: |
+        ansible-playbook -i inventory -c ssh --private-key ansible.key ansible/update.yml
+    - name: Cleanup
+      run: |
+        rm -f inventory ansible.cfg ansible.key
     # - name: Run Playbook
     #   uses: dawidd6/action-ansible-playbook@v3
     #   with:
