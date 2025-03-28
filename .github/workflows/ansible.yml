@@ -45,7 +45,7 @@ jobs:
         result_format = yaml
         nocows = false
         EOF
-        cat ${ANSIBLE_SSH_PRIVATE_KEY} > ansible.key
+        echo "${ANSIBLE_SSH_PRIVATE_KEY}" > ansible.key
         chmod 600 ansible.key
     - name: Run Playbook
       run: |
