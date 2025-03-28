@@ -10,6 +10,7 @@ on:
         type: choice
         options:
           - update
+        default: update
         
 jobs:
   Ansible:
