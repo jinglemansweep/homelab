@@ -9,7 +9,7 @@ steps:
       - echo "This is the build step"
       - echo "binary-data-123" > executable
   - name: a-test-step
-    image: debian
+    image: ghcr.io/goover/nodejs:12
     commands:
       - echo "Testing ..."
       - cat executable
