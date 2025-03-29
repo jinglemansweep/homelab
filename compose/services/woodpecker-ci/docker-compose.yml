@@ -21,6 +21,8 @@ services:
     command: agent
     depends_on:
       - woodpecker-server
+    ports:
+      - 3002:3000
     volumes:
       - woodpecker-agent-config:/etc/woodpecker
       - /var/run/docker.sock:/var/run/docker.sock
