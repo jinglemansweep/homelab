@@ -1,0 +1,9 @@
+when:
+  - event: cron
+    cron: "minute"
+
+steps:
+  - name: cron
+    image: debian
+    commands:
+      - date
