@@ -6,7 +6,7 @@ steps:
       from:
         address: "ci@ptre.net"
         name: "CI"
-      evaluate: 'commit.branch == "master"'
+      evaluate: 'commit.branch == "main"'
       recipients:
         - jinglemansweep@gmail.com
       level: success
