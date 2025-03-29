@@ -2,7 +2,7 @@ steps:
   mail:
     image: deblan/woodpecker-email
     settings:
-      dsn: "$[SMTP_DSN}"
+      dsn: ${SMTP_DSN}
       from:
         address: "ci@ptre.net"
         name: "CI"
