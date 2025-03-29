@@ -4,7 +4,7 @@ steps:
     settings:
       dsn: ${SMTP_DSN}
       from:
-        address: louis@ptre.es
+        address: ci@ptre.es
         name: "CI"
       evaluate: 'commit.branch == "main"'
       recipients:
