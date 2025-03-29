@@ -4,11 +4,11 @@ steps:
     settings:
       dsn: ${SMTP_DSN}
       from:
-        address: ci@ptre.es
+        address: ${SMTP_FROM}
         name: "CI"
       evaluate: 'commit.branch == "main"'
       recipients:
-        - jinglemansweep@gmail.com
+        - ${EMAIL_NOTIFICATIONS}
       level: success
       recipients_only: false
       content:
