@@ -12,4 +12,5 @@ steps:
     image: debian
     commands:
       - echo "Testing ..."
+      - env
       - cat executable
