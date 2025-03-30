@@ -1,29 +1,60 @@
-variable "cloudflare_account_name" {
+
+# NEW PROPOSED DESIGN BELOW
+
+variable "env_name" {
   type        = string
-  description = "Cloudflare Account Name"
+  description = "Environment Name"
 }
+
+variable "cloud" {
+  type = object({
+    dns = object({
+      cloudflare = object({
+        account_name = string
+        zones = list(object({
+          domain_name = string
+          records = list(object({
+            name    = string
+            type    = string
+            value   = string
+            proxied = bool
+          }))
+        }))
+      })
+    })
+  })
+  description = "Cloud Configuration"
+}
+
+variable "secrets" {
+  type = object({
+    infisical = object({
+      environment  = string
+      secrets_path = string
+    })
+  })
+  description = "Secrets Configuration"
+}
+
+variable "proxmox" {
+  type        = any
+  description = "Proxmox Configuration"
+}
+
+variable "talos" {
+  type = object({
+    endpoint = string
+    nodes = object({
+      controlplanes = any
+      workers       = any
+    })
+    install_image = string
+  })
+  description = "Talos Configuration"
+}
+
+# External (TF_VAR_)
 
 variable "infisical_workspace_id" {
-  type        = string
-  description = "Infisical Workspace ID"
-}
-
-variable "infisical_environment" {
-  type        = string
-  description = "Infisical Environment"
-  default     = "prod"
-}
-
-variable "cloudflare_zones" {
-  type = list(object({
-    domain_name = string
-    records = list(object({
-      name    = string
-      type    = string
-      value   = string
-      proxied = bool
-    }))
-  }))
-  description = "List of zones to create"
-  default     = []
+  type = string
 }

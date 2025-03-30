@@ -3,4 +3,6 @@ secrets.*
 
 tfstate
 *.tfstate
+*.private.tfvars
 .terraform
+

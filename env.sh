@@ -14,6 +14,3 @@ alias lab_infisical="infisical --projectId=${INFISICAL_PROJECT_ID} --token=${INF
 
 # Terraform
 export TF_VAR_infisical_workspace_id="${INFISICAL_PROJECT_ID}"
-function lab_terraform() {
-  lab_infisical run -- terraform -chdir=./terraform ${1:-plan} -var-file=../secrets.tfvars
-}

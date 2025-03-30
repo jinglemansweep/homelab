@@ -7,7 +7,7 @@ provider "infisical" {
 }
 
 data "infisical_secrets" "homelab" {
-  env_slug     = var.infisical_environment
+  env_slug     = var.secrets.infisical.environment
   workspace_id = var.infisical_workspace_id
   folder_path  = "/"
 }
