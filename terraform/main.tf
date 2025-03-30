@@ -98,7 +98,7 @@ module "vm_pvm1_test" {
   target_node     = "pvm1"
   vmid            = 881
   iso             = "nas:iso/ubuntu-24.04-live-server-amd64.iso"
-  net_mac_address = "01:00:00:00:00:00"
+  net_mac_address = "88:88:88:88:88:01"
 }
 
 #module "vm_pvm2_test" {
