@@ -12,7 +12,3 @@ data "infisical_secrets" "homelab" {
   folder_path  = "/"
 }
 
-output "fastmail_smtp_host" {
-  value     = data.infisical_secrets.homelab.secrets["FASTMAIL_SMTP_HOST"]
-  sensitive = true
-}
