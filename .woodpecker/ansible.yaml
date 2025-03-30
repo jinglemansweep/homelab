@@ -1,0 +1,10 @@
+when:
+  - event: push
+    branch: main
+
+
+steps:
+  - name: requirements
+    image: pad92/ansible-alpine
+    commands:
+      - ansible-galaxy install -r ./ansible/requirements.yml
