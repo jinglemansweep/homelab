@@ -1,3 +1,11 @@
+provider "cloudflare" {
+  api_token = data.infisical_secrets.homelab.secrets["CLOUDFLARE_API_TOKEN"].value
+}
+
+resource "cloudflare_account" "personal" {
+  name = "Personal Account"
+}
+
 module "zone_es_ptre" {
   source      = "../../modules/cloudflare/zone"
   account_id  = cloudflare_account.personal.id
