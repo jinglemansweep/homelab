@@ -1,24 +1,26 @@
-# SECRETS
+# ======================================================================================================================
+# INFISICAL
+# ======================================================================================================================
 
 # Infisical
 
 provider "infisical" {
-  host = "https://app.infisical.com"
-  auth = {
-    universal-auth = {}
-  }
+  host = var.infisical_host
 }
 
-data "infisical_secrets" "homelab" {
-  env_slug     = var.secrets.infisical.environment
-  workspace_id = var.infisical_workspace_id
-  folder_path  = "/"
-}
-
+# ======================================================================================================================
 # CLOUDFLARE
+# ======================================================================================================================
+
+ephemeral "infisical_secret" "cloudflare_api_token" {
+  name         = "api_token"
+  env_slug     = var.infisical_environment
+  workspace_id = var.infisical_workspace_id
+  folder_path  = "/cloudflare"
+}
 
 provider "cloudflare" {
-  api_token = data.infisical_secrets.homelab.secrets["CLOUDFLARE_API_TOKEN"].value
+  api_token = ephemeral.infisical_secret.cloudflare_api_token.value
 }
 
 resource "cloudflare_account" "personal" {
@@ -33,14 +35,80 @@ module "cloudflare_zones" {
   records     = each.value.records
 }
 
+# ======================================================================================================================
 # PROXMOX
+# ======================================================================================================================
 
-module "proxmox" {
-  source       = "./modules/proxmox/vm"
-  name         = "test"
-  target_node  = "pvm1"
-  vmid         = 881
-  api_endpoint = var.proxmox.endpoint
-  api_username = data.infisical_secrets.homelab.secrets["PROXMOX_USERNAME"].value
-  api_password = data.infisical_secrets.homelab.secrets["PROXMOX_PASSWORD"].value
+# Secrets
+
+ephemeral "infisical_secret" "proxmox_pvm1_username" {
+  name         = "username"
+  env_slug     = var.infisical_environment
+  workspace_id = var.infisical_workspace_id
+  folder_path  = "/proxmox/pvm1"
 }
+
+ephemeral "infisical_secret" "proxmox_pvm1_password" {
+  name         = "password"
+  env_slug     = var.infisical_environment
+  workspace_id = var.infisical_workspace_id
+  folder_path  = "/proxmox/pvm1"
+}
+
+ephemeral "infisical_secret" "proxmox_pvm2_username" {
+  name         = "username"
+  env_slug     = var.infisical_environment
+  workspace_id = var.infisical_workspace_id
+  folder_path  = "/proxmox/pvm2"
+}
+
+ephemeral "infisical_secret" "proxmox_pvm2_password" {
+  name         = "password"
+  env_slug     = var.infisical_environment
+  workspace_id = var.infisical_workspace_id
+  folder_path  = "/proxmox/pvm2"
+}
+
+# Providers
+
+provider "proxmox" {
+  alias           = "pvm1"
+  pm_api_url      = var.proxmox.pvm1.endpoint
+  pm_user         = ephemeral.infisical_secret.proxmox_pvm1_username.value
+  pm_password     = ephemeral.infisical_secret.proxmox_pvm1_password.value
+  pm_tls_insecure = true
+}
+
+provider "proxmox" {
+  alias           = "pvm2"
+  pm_api_url      = var.proxmox.pvm2.endpoint
+  pm_user         = ephemeral.infisical_secret.proxmox_pvm2_username.value
+  pm_password     = ephemeral.infisical_secret.proxmox_pvm2_password.value
+  pm_tls_insecure = true
+}
+
+# Instances
+
+module "vm_pvm1_test" {
+  source = "./modules/proxmox/vm"
+  providers = {
+    proxmox = proxmox.pvm1
+  }
+  name            = "test"
+  target_node     = "pvm1"
+  vmid            = 881
+  iso             = "nas:iso/ubuntu-24.04-live-server-amd64.iso"
+  net_mac_address = "01:00:00:00:00:00"
+}
+
+#module "vm_pvm2_test" {
+#  source = "./modules/proxmox/vm"
+#  providers = {
+#    proxmox = proxmox.pvm2
+#  }
+#  name            = "test"
+#  target_node     = "pvm2"
+#  vmid            = 882
+#  iso             = "nas:iso/ubuntu-24.04-live-server-amd64.iso"
+#  net_mac_address = "02:00:00:00:00:00"
+#}

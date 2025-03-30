@@ -26,23 +26,8 @@ variable "cloud" {
   description = "Cloud Configuration"
 }
 
-variable "secrets" {
-  type = object({
-    infisical = object({
-      environment  = string
-      secrets_path = string
-    })
-  })
-  description = "Secrets Configuration"
-}
-
 variable "proxmox" {
-  type = object({
-    endpoint = string
-    machines = map(object({
-      # TODO LATER
-    }))
-  })
+  type        = any
   description = "Proxmox Configuration"
 }
 
@@ -58,8 +43,18 @@ variable "talos" {
   description = "Talos Configuration"
 }
 
-# External (TF_VAR_)
+# Infisical
 
 variable "infisical_workspace_id" {
   type = string
+}
+
+variable "infisical_environment" {
+  type    = string
+  default = "dev"
+}
+
+variable "infisical_host" {
+  type    = string
+  default = "https://app.infisical.com"
 }
