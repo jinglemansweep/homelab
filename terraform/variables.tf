@@ -37,7 +37,12 @@ variable "secrets" {
 }
 
 variable "proxmox" {
-  type        = any
+  type = object({
+    endpoint = string
+    machines = map(object({
+      # TODO LATER
+    }))
+  })
   description = "Proxmox Configuration"
 }
 
