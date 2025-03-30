@@ -1,0 +1,25 @@
+services:
+  gitea-server:
+    image: docker.gitea.com/gitea:1.23.6
+    container_name: gitea
+    restart: always
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - GITEA__mailer__ENABLED=true
+      - GITEA__mailer__FROM=git@ptre.es
+      - GITEA__mailer__PROTOCOL=smtps
+      - GITEA__mailer__SMTP_ADDR=${FASTMAIL_SMTP_HOST}
+      - GITEA__mailer__SMTP_PORT=587
+      - GITEA__mailer__USER=${FASTMAIL_SMTP_USER}
+      - GITEA__mailer__PASSWD="${FASTMAIL_SMTP_PASSWORD}"
+    volumes:
+      - gitea-data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3020:3020"
+      - "222:22"
+
+volumes:
+  gitea-data:
