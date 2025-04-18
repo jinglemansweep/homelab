@@ -1,0 +1,13 @@
+services:
+  pgvector:
+    container_name: pgvector
+    image: pgvector/pgvector:pg17
+    restart: always
+    environment:
+      POSTGRES_USER: ${PGVECTOR_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${PGVECTOR_POSTGRES_PASSWORD}
+      POSTGRES_DB: pgvector
+    ports:
+      - "5432:5432"
+
+
