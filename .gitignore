@@ -1,8 +1,6 @@
-secrets.*
+envs/**/*
 .infisical.json
-
 tfstate
 *.tfstate
-*.private.tfvars
 .terraform
 
