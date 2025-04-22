@@ -99,6 +99,7 @@ module "vm_pvm1_test" {
   vmid            = 881
   iso             = "nas:iso/ubuntu-24.04-live-server-amd64.iso"
   net_mac_address = "88:88:88:88:88:01"
+  state        = "stopped"
 }
 
 #module "vm_pvm2_test" {
