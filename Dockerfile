@@ -5,8 +5,11 @@ ARG debian_release="bookworm"
 
 FROM ${base_image}:${debian_release}${base_image_suffix} AS build
 
+# Config
 ARG arch
 ARG debian_release
+ENV LAB_PATH="/opt/lab"
+ENV ENV_PATH="/work/env"
 
 # System Packages
 RUN apt-get -y update && \
@@ -46,10 +49,14 @@ RUN apt-get -y autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/build
 
 # Copy Resources
-COPY ./ansible /work/ansible
-COPY ./terraform /work/terraform
-COPY ./compose /work/compose
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+COPY ./ansible ${LAB_PATH}/ansible
+COPY ./terraform ${LAB_PATH}/terraform
+COPY ./compose ${LAB_PATH}/compose
+COPY ./setenv.sh ${LAB_PATH}/scripts/setenv.sh
+
+# Container
+WORKDIR /opt/lab
 
 # Entrypoint
 ENTRYPOINT ["/bin/bash", "/docker-entrypoint.sh"]

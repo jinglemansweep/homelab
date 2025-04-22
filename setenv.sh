@@ -1,8 +1,6 @@
 #!/bin/bash
 
-export SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
-
-declare env_path="${1:-${SCRIPT_DIR}/envs/default}"
+declare env_path="${1}"
 
 if [ -d "${env_path}" ]; then
 
@@ -16,7 +14,7 @@ if [ -d "${env_path}" ]; then
         export INFISICAL_UNIVERSAL_AUTH_CLIENT_SECRET
         export INFISICAL_PROJECT_ID
         export ANSIBLE_INVENTORY_FILE="${env_path}/inventory"
-        export TF_VAR_FILE="${env_pah}/tfvars"
+        export TF_VAR_FILE="${env_path}/tfvars"
     fi
 
     # Infisical
@@ -28,5 +26,9 @@ if [ -d "${env_path}" ]; then
     else
         echo "Error: Missing required environment variables for Infisical login"
     fi
+
+else
+    
+    echo "Environment not found!"
 
 fi
