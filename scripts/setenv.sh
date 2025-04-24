@@ -1,14 +1,23 @@
 #!/bin/bash
 
-export LAB_PATH="${1}"
-export ENV_PATH="${2}"
-export TEMP_PATH="/tmp/homelab"
+source "${PWD}/scripts/_common.sh"
 
-# Filesystem
+# Functions
 
-mkdir -p "${TEMP_PATH}"
+function ansible_init() {
+  export ANSIBLE_PRIVATE_KEY_FILE="${TEMP_PATH}/ssh/ansible.key"
+  export ANSIBLE_INVENTORY="${ENV_PATH}/ansible/inventory.yml"
+  export ANSIBLE_PLAYBOOK_DIR="${ENV_PATH}/ansible/playbooks"
+}
 
-# Environment
+function terraform_init() {
+  pushd "${LAB_PATH}/terraform" >/dev/null
+  echo "Terraform: Initializing"
+  terraform init
+  popd >/dev/null
+}
+
+# Process Environment
 
 if [ -d "${ENV_PATH}" ]; then
 
@@ -19,7 +28,6 @@ if [ -d "${ENV_PATH}" ]; then
     if [ -f "${ENV_PATH}/env.sh" ]; then
         echo "Sourcing: ${ENV_PATH}/env.sh"
         source "${ENV_PATH}/env.sh" 
-        export ANSIBLE_INVENTORY_FILE="${ENV_PATH}/inventory"
         export TF_VAR_FILE="${ENV_PATH}/terraform.tfvars"
     fi
 
@@ -35,11 +43,11 @@ if [ -d "${ENV_PATH}" ]; then
         fi
     fi
 
+    chmod -R 600 ${TEMP_PATH}/ssh/*.key
+
     if [ -f "${TEMP_PATH}/secrets.env" ]; then
         source "${TEMP_PATH}/secrets.env"
     fi
-
-    rm -rf "${TEMP_PATH}/secrets.env"
 
 else
     

@@ -3,4 +3,4 @@ envs/**/*
 tfstate
 *.tfstate
 .terraform
-
+ansible/roles/**/*

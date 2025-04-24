@@ -1,8 +1,0 @@
-services:
-  ansible-test:
-    build:
-      dockerfile: ./Dockerfile
-      context: .
-    environment:
-      ANSIBLE_PULL_PLAYBOOK: "./ansible/setup.yml"
-      

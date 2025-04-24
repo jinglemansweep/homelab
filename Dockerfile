@@ -56,6 +56,15 @@ COPY ./terraform ${LAB_PATH}/terraform
 COPY ./compose ${LAB_PATH}/compose
 COPY ./scripts ${LAB_PATH}/scripts
 
+# Setup
+
+ENV ANSIBLE_ROLES_PATH="${LAB_PATH}/ansible/roles"
+ENV ANSIBLE_CONFIG="${LAB_PATH}/ansible/ansible.cfg"
+ENV ANSIBLE_ROLES_PATH="${LAB_PATH}/ansible/roles"
+ENV ANSIBLE_HOST_KEY_CHECKING="false"
+RUN cd ${LAB_PATH}/ansible && \
+    ansible-galaxy install -r requirements.yml
+
 # Container
 WORKDIR /opt/lab
 
