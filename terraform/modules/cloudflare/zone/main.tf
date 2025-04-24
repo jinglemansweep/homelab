@@ -5,10 +5,12 @@ resource "cloudflare_zone" "zone" {
 }
 
 resource "cloudflare_record" "records" {
-  for_each = { for record in var.records : sha256("${record.name}-${record.type}-${record.value}") => record }
+  for_each = { for record in var.records : sha256("${record.name}-${record.type}-${record.content}") => record }
   zone_id  = cloudflare_zone.zone.id
   name     = each.value.name
   type     = each.value.type
-  value    = each.value.value
-  proxied  = each.value.proxied
+  content  = each.value.content
+  priority = lookup(each.value, "priority", null)
+  ttl      = lookup(each.value, "proxied", false) ? 1 : lookup(each.value, "ttl", var.default_ttl)
+  proxied  = lookup(each.value, "proxied", false)
 }

@@ -14,7 +14,7 @@ if [ -d "${env_path}" ]; then
         export INFISICAL_UNIVERSAL_AUTH_CLIENT_SECRET
         export INFISICAL_PROJECT_ID
         export ANSIBLE_INVENTORY_FILE="${env_path}/inventory"
-        export TF_VAR_FILE="${env_path}/tfvars"
+        export TF_VAR_FILE="${env_path}/terraform.tfvars"
     fi
 
     # Infisical

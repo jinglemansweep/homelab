@@ -10,11 +10,12 @@ variable "domain_name" {
 
 variable "records" {
   description = "DNS Records"
-  type = list(object({
-    name    = string
-    type    = string
-    value   = string
-    proxied = bool
-  }))
+  type = list(any)
   default = []
+}
+
+variable "default_ttl" {
+  description = "Default TTL for DNS Records"
+  type        = number
+  default     = 3600
 }

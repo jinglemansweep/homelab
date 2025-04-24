@@ -13,12 +13,7 @@ variable "cloud" {
         account_name = string
         zones = list(object({
           domain_name = string
-          records = list(object({
-            name    = string
-            type    = string
-            value   = string
-            proxied = bool
-          }))
+          records = list(any)
         }))
       })
     })
