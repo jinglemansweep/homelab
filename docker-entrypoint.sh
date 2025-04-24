@@ -33,18 +33,21 @@ function terraform_init() {
 declare -r command="${1:-shell}"
 shift 1
 
-echo "Command: ${command}"
+echo "Command: ${command} ${@}"
 echo
 
 if [ "${command}" == "shell" ]; then
   echo "Shell:"
+  echo
   exec "/bin/bash"
 elif [ "${command}" == "terraform" ]; then
   echo "Terraform: $1"
+  echo
   terraform_init
   terraform -chdir="${LAB_PATH}/terraform" ${1} -var-file "${TF_VAR_FILE}"
 else
   echo "Exec '${command}':"
+  echo
   exec "${command}" $@
 fi
 
