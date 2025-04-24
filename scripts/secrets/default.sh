@@ -1,5 +1,3 @@
 #!/bin/bash
 
-echo "Secret Helper: Default"
-
-echo "SECRET_HELPER=default" > "${TEMP_PATH}/secrets.env"
+echo "export DEFAULT_TEST=default" >> "${TEMP_PATH}/secrets.env"

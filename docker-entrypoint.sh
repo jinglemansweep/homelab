@@ -18,18 +18,20 @@ echo
 # Secrets
 
 if [ -n "${SECRET_HELPER}" ]; then
-  echo "Using secret helper: ${SECRET_HELPER}"
+  echo "Secret Helper: ${SECRET_HELPER}"
+  echo "export LAB_SECRET_HELPER=${SECRET_HELPER}" > ${TEMP_PATH}/secrets.env
   if [ -f "${LAB_PATH}/scripts/secrets/${SECRET_HELPER}.sh" ]; then
     source "${LAB_PATH}/scripts/secrets/${SECRET_HELPER}.sh"
-    echo "Secrets loaded"
   else
-    echo "Secret helper not found"
+    echo "WARNING: Secret helper not found"
   fi
 fi
 
 if [ -f "${TEMP_PATH}/secrets.env" ]; then
   source "${TEMP_PATH}/secrets.env"
 fi
+
+bash
 
 # Cleanup
 
