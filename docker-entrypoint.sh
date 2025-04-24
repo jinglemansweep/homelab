@@ -19,10 +19,32 @@ if [ -f "${LAB_PATH}/secrets.env" ]; then
   source "${LAB_PATH}/secrets.env"
 fi
 
-pushd "${LAB_PATH}/terraform" >/dev/null
-echo "Terraform: Initializing"
-terraform init
-popd >/dev/null
+# Functions
 
-# Run the command passed to the container
-exec "$@"
+function terraform_init() {
+  pushd "${LAB_PATH}/terraform" >/dev/null
+  echo "Terraform: Initializing"
+  terraform init
+  popd >/dev/null
+}
+
+# Arg Parsing
+
+declare -r command="${1:-shell}"
+shift 1
+
+echo "Command: ${command}"
+echo
+
+if [ "${command}" == "shell" ]; then
+  echo "Shell:"
+  exec "/bin/bash"
+elif [ "${command}" == "terraform" ]; then
+  echo "Terraform: $1"
+  terraform_init
+  terraform -chdir="${LAB_PATH}/terraform" ${1} -var-file "${TF_VAR_FILE}"
+else
+  echo "Exec '${command}':"
+  exec "${command}" $@
+fi
+
