@@ -5,19 +5,35 @@ echo "LAB ORCHESTRATOR"
 echo "================"
 echo
 
+# Setup
+
+export TEMP_PATH="/tmp/homelab"
+mkdir -p "${TEMP_PATH}"
+
 # Environment
-source /opt/lab/scripts/setenv.sh "${ENV_PATH}"
+
+source "${LAB_PATH}/scripts/setenv.sh" "${ENV_PATH}"
 echo
 
-# Infisical
-export INFISICAL_TOKEN="$(infisical login --method=universal-auth --client-id=${INFISICAL_UNIVERSAL_AUTH_CLIENT_ID} --client-secret=${INFISICAL_UNIVERSAL_AUTH_CLIENT_SECRET} --silent --plain)"
-export TF_VAR_infisical_workspace_id="${INFISICAL_PROJECT_ID}"
-infisical export --projectId=${INFISICAL_PROJECT_ID} --token=${INFISICAL_TOKEN} --format=dotenv-export > "${LAB_PATH}/secrets.env"
-
 # Secrets
-if [ -f "${LAB_PATH}/secrets.env" ]; then
-  source "${LAB_PATH}/secrets.env"
+
+if [ -n "${SECRET_HELPER}" ]; then
+  echo "Using secret helper: ${SECRET_HELPER}"
+  if [ -f "${LAB_PATH}/scripts/secrets/${SECRET_HELPER}.sh" ]; then
+    source "${LAB_PATH}/scripts/secrets/${SECRET_HELPER}.sh"
+    echo "Secrets loaded"
+  else
+    echo "Secret helper not found"
+  fi
 fi
+
+if [ -f "${TEMP_PATH}/secrets.env" ]; then
+  source "${TEMP_PATH}/secrets.env"
+fi
+
+# Cleanup
+
+rm -rf "${TEMP_PATH}"
 
 # Functions
 
@@ -33,21 +49,20 @@ function terraform_init() {
 declare -r command="${1:-shell}"
 shift 1
 
-echo "Command: ${command} ${@}"
-echo
+echo "Arguments: ${command} ${@}"
 
 if [ "${command}" == "shell" ]; then
-  echo "Shell:"
+  echo "[shell]"
   echo
   exec "/bin/bash"
 elif [ "${command}" == "terraform" ]; then
-  echo "Terraform: $1"
+  echo "[terraform] ${1}"
   echo
   terraform_init
-  terraform -chdir="${LAB_PATH}/terraform" ${1} -var-file "${TF_VAR_FILE}"
+  exec terraform -chdir="${LAB_PATH}/terraform" ${1} -var-file "${TF_VAR_FILE}"
 else
-  echo "Exec '${command}':"
+  echo "[exec] ${command} ${@}"
   echo
-  exec "${command}" $@
+  exec "${command}" ${@}
 fi
 

@@ -10,6 +10,7 @@ ARG arch
 ARG debian_release
 ENV LAB_PATH="/opt/lab"
 ENV ENV_PATH="/work/env"
+ENV SECRET_HELPER="default"
 
 # System Packages
 RUN apt-get -y update && \
@@ -53,7 +54,7 @@ COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 COPY ./ansible ${LAB_PATH}/ansible
 COPY ./terraform ${LAB_PATH}/terraform
 COPY ./compose ${LAB_PATH}/compose
-COPY ./setenv.sh ${LAB_PATH}/scripts/setenv.sh
+COPY ./scripts ${LAB_PATH}/scripts
 
 # Container
 WORKDIR /opt/lab
