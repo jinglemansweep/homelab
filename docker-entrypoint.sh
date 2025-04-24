@@ -5,37 +5,9 @@ echo "LAB ORCHESTRATOR"
 echo "================"
 echo
 
-# Setup
-
-export TEMP_PATH="/tmp/homelab"
-mkdir -p "${TEMP_PATH}"
-
 # Environment
 
-source "${LAB_PATH}/scripts/setenv.sh" "${ENV_PATH}"
-echo
-
-# Secrets
-
-if [ -n "${SECRET_HELPER}" ]; then
-  echo "Secret Helper: ${SECRET_HELPER}"
-  echo "export LAB_SECRET_HELPER=${SECRET_HELPER}" > ${TEMP_PATH}/secrets.env
-  if [ -f "${LAB_PATH}/scripts/secrets/${SECRET_HELPER}.sh" ]; then
-    source "${LAB_PATH}/scripts/secrets/${SECRET_HELPER}.sh"
-  else
-    echo "WARNING: Secret helper not found"
-  fi
-fi
-
-if [ -f "${TEMP_PATH}/secrets.env" ]; then
-  source "${TEMP_PATH}/secrets.env"
-fi
-
-bash
-
-# Cleanup
-
-rm -rf "${TEMP_PATH}"
+source "${LAB_PATH}/scripts/setenv.sh" "${PWD}" "${ENV_PATH}"
 
 # Functions
 
@@ -52,6 +24,7 @@ declare -r command="${1:-shell}"
 shift 1
 
 echo "Arguments: ${command} ${@}"
+echo
 
 if [ "${command}" == "shell" ]; then
   echo "[shell]"

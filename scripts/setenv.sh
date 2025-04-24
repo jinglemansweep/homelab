@@ -1,34 +1,49 @@
 #!/bin/bash
 
-declare env_path="${1}"
+export LAB_PATH="${1}"
+export ENV_PATH="${2}"
+export TEMP_PATH="/tmp/homelab"
 
-if [ -d "${env_path}" ]; then
+# Filesystem
 
-    echo "Environment: ${env_path}"
+mkdir -p "${TEMP_PATH}"
+
+# Environment
+
+if [ -d "${ENV_PATH}" ]; then
+
+    echo "Environment: ${ENV_PATH}"
 
     # Environment
-    if [ -f "${env_path}/env" ]; then
-        echo "Sourcing: ${env_path}/env"
-        source "${env_path}/env" 
-        export INFISICAL_UNIVERSAL_AUTH_CLIENT_ID
-        export INFISICAL_UNIVERSAL_AUTH_CLIENT_SECRET
-        export INFISICAL_PROJECT_ID
-        export ANSIBLE_INVENTORY_FILE="${env_path}/inventory"
-        export TF_VAR_FILE="${env_path}/terraform.tfvars"
+
+    if [ -f "${ENV_PATH}/env.sh" ]; then
+        echo "Sourcing: ${ENV_PATH}/env.sh"
+        source "${ENV_PATH}/env.sh" 
+        export ANSIBLE_INVENTORY_FILE="${ENV_PATH}/inventory"
+        export TF_VAR_FILE="${ENV_PATH}/terraform.tfvars"
     fi
 
-    # Infisical
-    if [ ! -z "${INFISICAL_PROJECT_ID}" -a ! -z "${INFISICAL_UNIVERSAL_AUTH_CLIENT_ID}" -a ! -z "${INFISICAL_UNIVERSAL_AUTH_CLIENT_SECRET}" ]; then
-        echo "Login: Infisical"
-        export INFISICAL_TOKEN="$(infisical login --method=universal-auth --client-id=${INFISICAL_UNIVERSAL_AUTH_CLIENT_ID} --client-secret=${INFISICAL_UNIVERSAL_AUTH_CLIENT_SECRET} --silent --plain)"
-        alias lab_infisical="infisical --projectId=${INFISICAL_PROJECT_ID} --token=${INFISICAL_TOKEN}"
-        export TF_VAR_infisical_workspace_id="${INFISICAL_PROJECT_ID}"
-    else
-        echo "Error: Missing required environment variables for Infisical login"
+    # Secrets
+
+    if [ -n "${SECRET_HELPER}" ]; then
+        echo "Secret Helper: ${SECRET_HELPER}"
+        echo "export LAB_SECRET_HELPER=${SECRET_HELPER}" > ${TEMP_PATH}/secrets.env
+        if [ -f "${LAB_PATH}/scripts/secrets/${SECRET_HELPER}.sh" ]; then
+            source "${LAB_PATH}/scripts/secrets/${SECRET_HELPER}.sh"
+        else
+            echo "WARNING: Secret helper not found"
+        fi
     fi
+
+    if [ -f "${TEMP_PATH}/secrets.env" ]; then
+        source "${TEMP_PATH}/secrets.env"
+    fi
+
+    rm -rf "${TEMP_PATH}/secrets.env"
 
 else
     
     echo "Environment not found!"
 
 fi
+
