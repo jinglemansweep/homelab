@@ -60,10 +60,10 @@ COPY ./scripts ${LAB_PATH}/scripts
 
 ENV ANSIBLE_ROLES_PATH="${LAB_PATH}/ansible/roles"
 ENV ANSIBLE_CONFIG="${LAB_PATH}/ansible/ansible.cfg"
-ENV ANSIBLE_ROLES_PATH="${LAB_PATH}/ansible/roles"
+ENV ANSIBLE_ROLES_PATH="${LAB_PATH}/ansible/galaxy"
 ENV ANSIBLE_HOST_KEY_CHECKING="false"
 RUN cd ${LAB_PATH}/ansible && \
-    ansible-galaxy install -r requirements.yml
+    ansible-galaxy install -r requirements.yml -p "${LAB_PATH}/ansible/galaxy"
 
 # Container
 WORKDIR /opt/lab
