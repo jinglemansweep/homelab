@@ -9,7 +9,7 @@ resource "cloudflare_record" "records" {
   zone_id  = cloudflare_zone.zone.id
   name     = each.value.name
   type     = each.value.type
-  content  = each.value.content
+  content  = each.value.type == "TXT" ? "\"${each.value.content}\"" : each.value.content
   priority = lookup(each.value, "priority", null)
   ttl      = lookup(each.value, "proxied", false) ? 1 : lookup(each.value, "ttl", var.default_ttl)
   proxied  = lookup(each.value, "proxied", false)
