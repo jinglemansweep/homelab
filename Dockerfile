@@ -14,7 +14,7 @@ ENV SECRET_HELPER="default"
 
 # System Packages
 RUN apt-get -y update && \
-    apt-get -y install curl python3-pip python3-venv wget
+    apt-get -y install curl figlet python3-pip python3-venv wget
 
 # Filesystem
 RUN mkdir -p /tmp/build

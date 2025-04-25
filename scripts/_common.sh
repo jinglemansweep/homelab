@@ -8,3 +8,10 @@ else
     echo "ERROR: 'ENV_PATH' environment variable not set!"
 fi
 
+function header() {
+    figlet "${1}"
+}
+
+function subheader() {
+    figlet -f "/usr/share/figlet/small.flf" "${1}"
+}

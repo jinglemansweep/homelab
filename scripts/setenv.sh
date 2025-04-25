@@ -5,16 +5,17 @@ source "${PWD}/scripts/_common.sh"
 # Functions
 
 function ansible_init() {
-  export ANSIBLE_PRIVATE_KEY_FILE="${TEMP_PATH}/ssh/ansible.key"
-  export ANSIBLE_INVENTORY="${ENV_PATH}/ansible/inventory.yml"
-  export ANSIBLE_PLAYBOOK_DIR="${ENV_PATH}/ansible/playbooks"
+    export ANSIBLE_PRIVATE_KEY_FILE="${TEMP_PATH}/ssh/ansible.key"
+    export ANSIBLE_INVENTORY="${ENV_PATH}/ansible/inventory.yml"
+    export ANSIBLE_PLAYBOOK_DIR="${ENV_PATH}/ansible/playbooks"
 }
 
 function terraform_init() {
-  pushd "${LAB_PATH}/terraform" >/dev/null
-  echo "Terraform: Initializing"
-  terraform init
-  popd >/dev/null
+    export TF_VAR_FILE="${ENV_PATH}/terraform/terraform.tfvars"
+    pushd "${LAB_PATH}/terraform" >/dev/null
+    echo "Terraform: Initializing"
+    terraform init
+    popd >/dev/null
 }
 
 # Process Environment
@@ -28,15 +29,15 @@ if [ -d "${ENV_PATH}" ]; then
     if [ -f "${ENV_PATH}/env.sh" ]; then
         echo "Sourcing: ${ENV_PATH}/env.sh"
         source "${ENV_PATH}/env.sh" 
-        export TF_VAR_FILE="${ENV_PATH}/terraform.tfvars"
+        
     fi
 
     # Secrets
 
     if [ -n "${SECRET_HELPER}" ]; then
-        echo "Secret Helper: ${SECRET_HELPER}"
-        echo "export LAB_SECRET_HELPER=${SECRET_HELPER}" > ${TEMP_PATH}/secrets.env
         if [ -f "${LAB_PATH}/scripts/secrets/${SECRET_HELPER}.sh" ]; then
+            echo "Secret Helper: ${SECRET_HELPER}"
+            echo "export LAB_SECRET_HELPER=${SECRET_HELPER}" > ${TEMP_PATH}/secrets.env
             source "${LAB_PATH}/scripts/secrets/${SECRET_HELPER}.sh"
         else
             echo "WARNING: Secret helper not found"
