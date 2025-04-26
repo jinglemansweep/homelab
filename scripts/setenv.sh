@@ -28,11 +28,8 @@ if [ -d "${ENV_PATH}" ]; then
 
     # Environment
 
-    if [ -f "${ENV_PATH}/env.sh" ]; then
-        echo "Sourcing: ${ENV_PATH}/env.sh"
-        source "${ENV_PATH}/env.sh"
-
-    fi
+    echo "Sourcing: ${ENV_PATH}/env/*"
+    source "${ENV_PATH}/env/*"
 
     # Secrets
 
