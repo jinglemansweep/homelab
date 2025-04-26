@@ -1,0 +1,70 @@
+- name: Creating default groups
+  group:
+    name: "{{ item }}"
+  with_items: "{{ default_groups }}"
+  loop_control:
+    label: "{{ item }}"
+
+- name: Per-user group creation
+  group:
+    name: "{{ item.username }}"
+    gid: "{{ item.gid | default(item.uid) | default(omit) }}"
+  with_items: "{{ users }}"
+  loop_control:
+    label: "{{ item.username }}"
+
+- name: User creation
+  user:
+    name: "{{ item.username }}"
+    comment: "{{ item.comment | default(item.username) }}"
+    password: ""
+    update_password: on_create
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    groups: "{{ default_groups + item.groups + [ item.username ] }}"
+    group: "{{ default_group }}"
+    append: yes
+  with_items: "{{ users }}"
+  loop_control:
+    label: "{{ item.username }}"
+
+- name: Add SSH authorized keys
+  authorized_key:
+    user: "{{ item.username }}"
+    key: "{{ item.public_key | default('') }}"
+    manage_dir: yes
+  with_items: "{{ users }}"
+  loop_control:
+    label: "{{ item.username }}"
+  when: item.state | default('present') == "present"
+
+- name: Disable user login MOTD
+  copy:
+    content: ""
+    dest: /home/{{ item.username }}/.hushlogin
+    group: users
+    owner: "{{ item.username }}"
+    mode: 0755
+    force: no
+  with_items: "{{ users }}"
+  loop_control:
+    label: "{{ item.username }}"
+  when: item.state | default('present') == "present"
+
+- name: Disable archived users
+  user:
+    name: "{{ item.username }}"
+    shell: /sbin/nologin
+  with_items: "{{ users }}"
+  loop_control:
+    label: "{{ item.username }}"
+  when: item.state | default('present') == "absent"
+
+- name: Remove SSH authorized keys from archived users
+  authorized_key:
+    user: "{{ item.username }}"
+    key: "{{ item.public_key | default('') }}"
+    state: absent
+  with_items: "{{ users }}"
+  loop_control:
+    label: "{{ item.username }}"
+  when: item.state | default('present') == "absent"

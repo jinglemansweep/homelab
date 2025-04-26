@@ -1,0 +1,6 @@
+---
+default_group: users
+default_groups:
+  - users
+
+nonusers: []
