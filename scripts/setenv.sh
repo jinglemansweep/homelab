@@ -9,6 +9,7 @@ export ANSIBLE_PRIVATE_KEY_FILE="${TEMP_PATH}/ssh/ansible.key"
 export ANSIBLE_INVENTORY="${ENV_PATH}/ansible/inventory.yml"
 export ANSIBLE_PLAYBOOK_DIR="${ENV_PATH}/ansible/playbooks"
 export ANSIBLE_ROLES_PATH="${LAB_PATH}/ansible/roles:${LAB_PATH}/ansible/galaxy"
+export ANSIBLE_REMOTE_USER="automation"
 export TF_VAR_FILE="${ENV_PATH}/terraform/terraform.tfvars"
 
 # Functions
@@ -28,8 +29,12 @@ if [ -d "${ENV_PATH}" ]; then
 
     # Environment
 
-    echo "Sourcing: ${ENV_PATH}/env/*"
-    source "${ENV_PATH}/env/*"
+    for i in "${ENV_PATH}/env"/*; do
+        if [ -f "${i}" ]; then
+            echo "Sourcing: ${i}"
+            source "${i}"
+        fi
+    done
 
     # Secrets
 
