@@ -2,6 +2,7 @@
 
 declare -r script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 source "${script_dir}/_common.sh"
+source "${script_dir}/setenv.sh"
 
 header "Homelab Runner"
 echo
