@@ -27,7 +27,6 @@ elif [ "${command}" == "ansible-playbook" ]; then
   subheader "Ansible Playbook"
   echo "Args: ${@}"
   echo
-  ansible_init
   cd "${ENV_PATH}/ansible"
   exec ansible-playbook ${@}
 else
@@ -35,4 +34,3 @@ else
   echo
   exec "${command}" ${@}
 fi
-
