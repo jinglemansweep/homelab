@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source "${PWD}/scripts/_common.sh"
+declare -r script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+source "${script_dir}/_common.sh"
 
 # Environment
 
@@ -38,7 +39,7 @@ if [ -d "${ENV_PATH}" ]; then
     if [ -n "${SECRET_HELPER}" ]; then
         if [ -f "${LAB_PATH}/scripts/secrets/${SECRET_HELPER}.sh" ]; then
             echo "Secret Helper: ${SECRET_HELPER}"
-            echo "export LAB_SECRET_HELPER=${SECRET_HELPER}" > ${TEMP_PATH}/secrets.env
+            echo "export SECRET_HELPER=${SECRET_HELPER}" > ${TEMP_PATH}/secrets.env
             source "${LAB_PATH}/scripts/secrets/${SECRET_HELPER}.sh"
         else
             echo "WARNING: Secret helper not found"

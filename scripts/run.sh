@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source "${LAB_PATH}/scripts/setenv.sh"
+declare -r script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+source "${script_dir}/_common.sh"
 
 header "Homelab Runner"
 echo
