@@ -1,16 +1,25 @@
+
+- name: Check if Infisical binary exists.
+  stat:
+    path: "{{ infisical_bin_path }}"
+  register: bin_check
+
 - name: Download setup script
   ansible.builtin.get_url:
-    url: https://dl.cloudsmith.io/public/infisical/infisical-cli/setup.deb.sh
+    url: "{{ infisical_download_url }}"
     dest: /tmp/infisical-setup.sh
+  when: not bin_check.stat.exists
 
 - name: Run setup script
   ansible.builtin.command: bash /tmp/infisical-setup.sh
+  when: not bin_check.stat.exists
 
 - name: Install packages
   ansible.builtin.apt:
     name: infisical
     state: present
     update_cache: true
+  when: not bin_check.stat.exists
 
 - name: Remove setup script
   ansible.builtin.file:
